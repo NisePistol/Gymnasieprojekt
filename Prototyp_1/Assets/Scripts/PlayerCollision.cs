@@ -6,6 +6,9 @@ using TMPro;
 public class PlayerCollision : MonoBehaviour
 {
     public Transform startingPosition;
+
+    public Transform enemyPosition;
+
     public TextMeshProUGUI coinText;
     int numberOfCoins = 0;
 
@@ -21,13 +24,17 @@ public class PlayerCollision : MonoBehaviour
             coinText.text = "x" + numberOfCoins;
             Destroy(collision.gameObject);
         }
+        else if (collision.tag == "FinnishLine")
+        {
+            FindObjectOfType<CameraMovement>().MoveCamera();
+
+            //enemyPosition.position = new Vector2(transform.position.x + 3, 0);
+        }
     }
 
     public void ResetPosition()
     {
         transform.position = startingPosition.position;
     }
-
-
 }
 

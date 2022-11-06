@@ -5,7 +5,7 @@ public class FollowPlayer : MonoBehaviour
     public GameObject player;
     public float speed;
 
-    float distance;
+    public float distance;
     // Update is called once per frame
     void Update()
     {
