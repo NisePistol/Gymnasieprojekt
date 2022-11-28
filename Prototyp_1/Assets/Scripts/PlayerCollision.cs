@@ -1,22 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public Transform startingPosition;
+    public TextMeshProUGUI coinText;
+
+    public static int numberOfCoins = 0;
+
+    public Canvas overlayCanvas;
+
+    public TextMeshProUGUI timerText;
 
     public Transform enemyPosition;
 
-    public TextMeshProUGUI coinText;
-    int numberOfCoins = 0;
+    public float enemySpawnDistance = 4;
+
+    int room = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Respawn")
         {
-            ResetPosition();
+            FindObjectOfType<GameManager>().RespawnPlayer();
+            FindObjectOfType<CameraMovement>().MoveCameraForward();
+            PlayerController.canMove = false;
+            overlayCanvas.gameObject.SetActive(true);
+            Timer.startCountdown = true;
+            timerText.text = "";
+            if (room != 0)
+            {
+                numberOfCoins -= 3;
+                coinText.text = "x" + numberOfCoins;
+            }
+            AddTime();
         }
         else if (collision.tag == "Coin")
         {
@@ -26,15 +42,46 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (collision.tag == "FinnishLine")
         {
-            FindObjectOfType<CameraMovement>().MoveCamera();
+            GameManager.room++;
 
-            //enemyPosition.position = new Vector2(transform.position.x + 3, 0);
+            FindObjectOfType<CameraMovement>().MoveCameraForward();
+
+            enemyPosition.position = new Vector2(transform.position.x + enemySpawnDistance, transform.position.y);
+
+            room++;
+            AddTime();
         }
     }
 
-    public void ResetPosition()
+    void AddTime()
     {
-        transform.position = startingPosition.position;
+        switch (room)
+        {
+            case 0:
+                Timer.roundTimer = 100;
+                return;
+            case 1:
+                Timer.roundTimer = 100;
+                return;
+            case 2:
+                Timer.roundTimer = 100;
+                return;
+            case 3:
+                Timer.roundTimer = 100;
+                return;
+            case 4:
+                Timer.roundTimer = 100;
+                return;
+            case 5:
+                Timer.roundTimer = 100;
+                return;
+            case 6:
+                Timer.roundTimer = 100;
+                return;
+            case 7:
+                Timer.roundTimer = 999;
+                return;
+        }
     }
 }
 
