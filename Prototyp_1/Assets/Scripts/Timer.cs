@@ -3,7 +3,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public static float roundTimer = 100;
+    public static float roundTimer = 15;
 
     public float countdownTimer = 3.0f;
     public static bool startCountdown = false;
@@ -16,6 +16,10 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI coinText;
 
     int room = 0;
+
+    public bool timerActivated = true;
+
+    public GameObject enemy;
 
     void Update()
     {
@@ -32,16 +36,27 @@ public class Timer : MonoBehaviour
                 countdownTimer += 3;
             }
         }
-
-        if (roundTimer < 0.0f)
-        {          
-            NextRound();
-        }
-
-        if (!startCountdown)
+        
+        //Om man avndänder timern
+        if(timerActivated)
         {
-            roundTimer -= Time.deltaTime;
-            timerText.text = ((int)roundTimer).ToString();
+            if (roundTimer < 0.0f)
+            {          
+                NextRound();
+            }
+
+            if (!startCountdown)
+            {
+                
+                roundTimer -= Time.deltaTime;
+                timerText.text = ((int)roundTimer).ToString();               
+            }
+        }
+        else
+        {
+            timerText.SetText("");
+            roundTimer = 999;
+            enemy.SetActive(true);
         }
 
         room = GameManager.room;
@@ -68,27 +83,26 @@ public class Timer : MonoBehaviour
     {
         switch (room)
         {
-
             case 0:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 10;
                 return;
             case 1:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 12;
                 return;
             case 2:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 11;
                 return;
             case 3:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 14;
                 return;
             case 4:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 17;
                 return;
             case 5:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 14;
                 return;
             case 6:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 22;
                 return;
             case 7:
                 Timer.roundTimer = 999;

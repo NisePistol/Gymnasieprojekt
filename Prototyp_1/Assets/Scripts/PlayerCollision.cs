@@ -26,7 +26,6 @@ public class PlayerCollision : MonoBehaviour
             PlayerController.canMove = false;
             overlayCanvas.gameObject.SetActive(true);
             Timer.startCountdown = true;
-            timerText.text = "";
             if (room != 0)
             {
                 numberOfCoins -= 3;
@@ -58,25 +57,25 @@ public class PlayerCollision : MonoBehaviour
         switch (room)
         {
             case 0:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 10;
                 return;
             case 1:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 12;
                 return;
             case 2:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 11;
                 return;
             case 3:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 14;
                 return;
             case 4:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 17;
                 return;
             case 5:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 14;
                 return;
             case 6:
-                Timer.roundTimer = 100;
+                Timer.roundTimer = 22;
                 return;
             case 7:
                 Timer.roundTimer = 999;
